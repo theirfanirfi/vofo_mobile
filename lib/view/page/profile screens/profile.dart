@@ -1,13 +1,44 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_vofo/models/Profile.dart';
 import 'package:my_vofo/view/widgets/longs.dart';
 import 'package:my_vofo/view/widgets/my_vos.dart';
 import 'package:my_vofo/view/widgets/simple_button.dart';
 import 'package:my_vofo/view/widgets/simple_tab_bar.dart';
 
-class Profile extends StatelessWidget {
+import '../../../calls/profile/GetProfile.dart';
+
+class Profile extends StatefulWidget {
   final bool isMe;
-  const Profile({required this.isMe, Key? key}) : super(key: key);
+  final String username;
+  const Profile({required this.isMe, required this.username, Key? key}) : super(key: key);
+
+  @override
+  State<Profile> createState() => _Profile();
+}
+
+class _Profile extends State<Profile> {
+  final bool isMe = false;
+  ProfileModel? profile;
+
+  _fetchProfile () async {
+    var prof = jsonDecode(await getProfile(widget.username));
+    if(prof['status']){
+      var pf = prof['profile'];
+      ProfileModel pfObj = ProfileModel.fromJson(pf);
+      setState(() {
+        profile = pfObj;
+      });
+    }
+
+
+  }
+  @override
+  void initState() {
+    _fetchProfile();
+  }
 
   @override
   Widget build(BuildContext context) {

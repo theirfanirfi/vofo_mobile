@@ -24,7 +24,7 @@ class VofoStorage {
   }
 
   getToken() {
-    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2IzNmE1NzhkNjFjMzNlOGFkMDU4YiIsIm5hbWUiOiJzaG9haWIzIiwidXNlcm5hbWUiOiJzaG9haWJ1c2VybmFtZTMiLCJlbWFpbCI6IiIsImlhdCI6MTY5NTAyMjYzM30.fSdqg5lhy00CaH2qcqkWnA_IaB9HUU-bqoi5650uEU0";
+    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2IzNmE1NzhkNjFjMzNlOGFkMDU4YiIsIm5hbWUiOiJzaG9haWIzIiwidXNlcm5hbWUiOiJzaG9haWJ1c2VybmFtZTMiLCJlbWFpbCI6IiIsImlhdCI6MTY5NTQ2NDMyMH0.1L_3U_ijNGBi8igNghFWp3dmO3e5v45UQ_N4MNfSnZU";
   }
 
 

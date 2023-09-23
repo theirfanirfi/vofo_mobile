@@ -77,7 +77,9 @@ class _Message extends State<Message> {
                           onTap: (() => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Profile(isMe: conversation.amIuserOne)))),
+                                  builder: (context) => Profile(isMe: conversation.amIuserOne,
+                                  username: conversation.amIuserOne ? conversation.userTwoInfo.username : conversation.userOneInfo.username
+                                  )))),
                           child: CircleAvatar(
                             radius: 22,
                             backgroundImage: NetworkImage(
