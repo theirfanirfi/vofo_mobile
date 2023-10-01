@@ -10,6 +10,7 @@ class ProfileModel extends HandleException{
   final int followers;
   final int following;
   final bool isMyProfile;
+  final bool isFollowing;
   final String created_at;
   final String updated_at;
 
@@ -22,6 +23,7 @@ class ProfileModel extends HandleException{
         required this.followers,
         required this.following,
         required this.isMyProfile,
+        required this.isFollowing,
         required this.created_at,
         required this.updated_at
 
@@ -36,6 +38,7 @@ class ProfileModel extends HandleException{
       followers: json['followers'],
       following: json['following'],
       isMyProfile: json['isMyProfile'],
+      isFollowing: json['isFollowing'],
       created_at: json['created_at'],
       updated_at: json['updated_at'],
     );

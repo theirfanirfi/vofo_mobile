@@ -73,7 +73,7 @@ class _MyVosState extends State<MyVos> {
                 GestureDetector(
                   onTap: (() {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ShortVoFo()));
+                        MaterialPageRoute(builder: (context) => ShortVoFo(voice: widget.voice)));
                   }),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

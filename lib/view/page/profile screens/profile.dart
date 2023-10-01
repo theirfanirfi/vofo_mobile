@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_vofo/calls/profile/FollowUnFollow.dart';
 import 'package:my_vofo/models/Profile.dart';
 import 'package:my_vofo/view/widgets/longs.dart';
 import 'package:my_vofo/view/widgets/my_vos.dart';
@@ -20,16 +21,21 @@ class Profile extends StatefulWidget {
 }
 
 class _Profile extends State<Profile> {
-  final bool isMe = false;
+  bool isMe = false;
+  bool isFollowing = false;
   ProfileModel? profile;
 
   _fetchProfile () async {
     var prof = jsonDecode(await getProfile(widget.username));
     if(prof['status']){
       var pf = prof['profile'];
+      print('pf');
+      print(pf);
       ProfileModel pfObj = ProfileModel.fromJson(pf);
       setState(() {
         profile = pfObj;
+        isMe = pfObj.isMyProfile;
+        isFollowing = pfObj.isFollowing;
       });
     }
 
@@ -51,7 +57,7 @@ class _Profile extends State<Profile> {
           elevation: 0,
           scrolledUnderElevation: 0,
           title: Text(
-            'Chloe_jr',
+            profile!.username,
             style: GoogleFonts.inter(
               textStyle: TextStyle(
                   color: Color.fromRGBO(59, 59, 59, 1),
@@ -89,7 +95,7 @@ class _Profile extends State<Profile> {
                           child: Column(
                             children: [
                               Text(
-                                '31',
+                              profile!.voiceRecords.toString(),
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       color: Color.fromRGBO(59, 59, 59, 1),
@@ -118,7 +124,7 @@ class _Profile extends State<Profile> {
                           child: Column(
                             children: [
                               Text(
-                                '225',
+                              profile!.followers.toString(),
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       color: Color.fromRGBO(59, 59, 59, 1),
@@ -147,7 +153,7 @@ class _Profile extends State<Profile> {
                           child: Column(
                             children: [
                               Text(
-                                '243',
+                                profile!.following.toString(),
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       color: Color.fromRGBO(59, 59, 59, 1),
@@ -176,7 +182,7 @@ class _Profile extends State<Profile> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                       child: Text(
-                        'Chloe Jr',
+                        profile!.username,
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
                               color: Color.fromRGBO(59, 59, 59, 1),
@@ -227,7 +233,10 @@ class _Profile extends State<Profile> {
                                   isProfile: true,
                                 )),
                           )
-                        : Row(
+                        :
+
+                    Row(
+
                             children: [
                               Expanded(
                                 child: Padding(
@@ -237,10 +246,31 @@ class _Profile extends State<Profile> {
                                       child: SimpleButton(
                                         backgroundColor:
                                             Color.fromRGBO(219, 219, 219, 1),
-                                        text: 'Following',
+                                        text: (isFollowing) ? 'Following' : 'Follow',
                                         textColor:
                                             Color.fromRGBO(59, 59, 59, 1),
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          var response = await FollowUnFollow(profile!.username);
+                                          var jsonResponse = jsonDecode(response);
+                                          if(jsonResponse['status'] == 200){
+                                            if(jsonResponse['isFollowed']){
+                                              print('followed');
+                                              setState(() {
+                                                isFollowing = true;
+                                              });
+                                            }
+
+                                            if(jsonResponse['isUnFollowed']){
+                                              print('unfollowed');
+                                              setState(() {
+                                                isFollowing = false;
+                                              });
+                                            }
+                                          }else {
+
+                                          }
+
+                                        },
                                         borderColor:
                                             Color.fromRGBO(219, 219, 219, 1),
                                         isProfile: true,
@@ -267,6 +297,8 @@ class _Profile extends State<Profile> {
                               ),
                             ],
                           )
+
+
                   ],
                 ),
               ),

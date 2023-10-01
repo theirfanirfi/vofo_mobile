@@ -35,14 +35,14 @@ class _SearchBarState extends State<SearchBar>
           backgroundColor: Colors.white,
           elevation: 0,
           scrolledUnderElevation: 0,
-          title: Container(
+          title: Padding(padding: const EdgeInsets.all(8.0), child: Container(
               height: 45,
               child: SimpleTextFormField(
                 obscureText: false,
                 hintText: 'Search MyVo',
                 maxLength: 0,
-                isSearch: true,
-              )),
+                isSearch: true, callBack: (String ) {  },
+              ))),
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -91,26 +91,26 @@ class _SearchBarState extends State<SearchBar>
         body: SingleChildScrollView(
           child: (Column(
             children: [
-              MyVos(),
-              MyVos(
-                isThread: true,
-              ),
+              // MyVos(voice: null,),
+              // MyVos(
+              //   isThread: true, voice: null,
+              // ),
               Longs(),
               Longs(
                 isPromoted: true,
               ),
-              MyVos(
-                isThread: true,
-              ),
-              MyVos(),
+              // MyVos(
+              //   isThread: true,
+              // ),
+              // MyVos(),
               Longs(),
               Longs(
                 isPromoted: true,
               ),
-              MyVos(
-                isThread: true,
-              ),
-              MyVos(),
+              // MyVos(
+              //   isThread: true,
+              // ),
+              // MyVos(),
               Longs(),
               Longs(
                 isPromoted: true,

@@ -5,8 +5,11 @@ import 'package:my_vofo/const/my_vo_fo_icons.dart';
 import 'package:my_vofo/view/page/share%20screens/share_screen.dart';
 import 'package:my_vofo/view/widgets/audio_wave.dart';
 
+import '../../../models/Voice.dart';
+
 class ShortDetail extends StatelessWidget {
-  const ShortDetail({super.key});
+  final Voice voice;
+  const ShortDetail({required this.voice, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class ShortDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
-                          'Smith',
+                          voice.user.username,
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
                                 color: Color.fromRGBO(89, 101, 111, 1),
@@ -67,7 +70,7 @@ class ShortDetail extends StatelessWidget {
                             Flexible(
                               flex: 2,
                               child: AutoSizeText(
-                                '@smith_oran ',
+                                '@ '+voice.user.username,
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       color: Color.fromRGBO(89, 101, 111, 1),
@@ -114,7 +117,7 @@ class ShortDetail extends StatelessWidget {
                 ),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.7,
-                  child: AudioWave(false, path: ''),
+                  child: AudioWave(true, path: voice.voice_record),
                 ),
               ),
             ),
@@ -123,7 +126,7 @@ class ShortDetail extends StatelessWidget {
                 left: 15,
               ),
               child: AutoSizeText(
-                '#English #ClimateChange #heat #viral #Europe #Hash #Morehastag #music',
+                voice.hash_tags,
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
                       color: Color.fromRGBO(0, 159, 183, 1),
@@ -140,7 +143,7 @@ class ShortDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 15.0, top: 3.0),
               child: Text(
-                '09:41 - 11 March 2023',
+                voice.created_at.toString(),
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
                       color: Color.fromRGBO(89, 101, 111, 1),
@@ -168,7 +171,7 @@ class ShortDetail extends StatelessWidget {
                 Expanded(
                     flex: 2,
                     child: Text(
-                      ' 19.589',
+                      ' '+voice.listens.toString(),
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
                             color: Color.fromRGBO(89, 101, 111, 1),
@@ -185,7 +188,7 @@ class ShortDetail extends StatelessWidget {
                 Expanded(
                     flex: 2,
                     child: Text(
-                      ' 19.589',
+                      ' '+voice.shares.toString(),
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
                             color: Color.fromRGBO(89, 101, 111, 1),
@@ -203,7 +206,7 @@ class ShortDetail extends StatelessWidget {
                 Expanded(
                     flex: 2,
                     child: Text(
-                      ' 100K ',
+                        ' '+voice.likes.toString(),
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
                             color: Color.fromRGBO(89, 101, 111, 1),
